@@ -1,0 +1,11 @@
+**** Initial Config and Setup ****
+git config --global user.name "John Doe"
+git config --global user.email "jd@gmail.com"
+git config --global core.editor vim
+git config --list
+
+
+**** Create new repo ****
+git init
+git add README
+git commit -m 'Initial Checkin File'
