@@ -23,3 +23,44 @@ git add [directory]
 
     // If you make changes after first running add before commit you must
     // add them again to pick up those changes
+
+**** Ignore files ****
+Use .gitignore file
+Example:
+	*.swp
+	*~
+
+
+**** Diff Changes ****
+Changed but not staged: 
+	git diff
+
+Staged but not committed:
+	git diff --staged
+
+
+**** Commit changes ****
+git commit 		// Opens UI for commit
+git commit -m "message" // Quick commit with message
+git commit -a  		// Skip staging area and just commit all files
+
+**** Removes and Moves ****
+git rm [file to remove]
+git mv [From][To] 	// Rename or move file
+
+**** History ****
+git log
+git log -p		// Show diffs
+git log --stat		// Stats for each commit
+
+**** Push ****
+git clone [repo url]	// Clone from an online repo creates origin remote and
+master local branch
+git push origin master	// Push to online repo
+git fetch [remote name]	// Fetch changes from repo
+get merge [remotename]/[branchname]	// Merge changes after fetch
+git pull [remotename] [branchname]	// fetch + merge (make sure you
+commit)
+
+
+	
