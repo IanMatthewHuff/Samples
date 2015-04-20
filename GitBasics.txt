@@ -9,3 +9,17 @@ git config --list
 git init
 git add README
 git commit -m 'Initial Checkin File'
+
+**** Clone Existing Repo ****
+git clone https://github.com/libgit2/libgit2 [opt directory name]
+
+**** Status of Files ****
+git status
+git status -s // Simplified status
+
+**** Add new file ****
+git add [filename]
+git add [directory]
+
+    // If you make changes after first running add before commit you must
+    // add them again to pick up those changes
