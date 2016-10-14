@@ -1,0 +1,44 @@
+Algorithms Question #1:
+
+Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+You may assume that each input would have exactly one solution.
+
+Example:
+Given nums = [2,7,11,15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0,1]
+
+At the most basic level, we can just check all possibly combos, but that would be a pretty big check.
+
+2 = 9, 2 + 7 = 9, 2 + 7 + 11 = 9? Can't be optimal. Order does not matter, but still checking every possible thing.
+
+We can do a bunch of work, based on what numbers are too big to add up to the total.
+
+for example with 9: 11 and 15 both can't be in the mix as they are > 9. This might make a difference if our list is sorted or not. Ask if sorted? Also, the exactly one solution thing is big.
+
+Basic algorithm (assuming unsorted list)
+
+Pick next int
+   Move next, if next > target skip
+     else add to currentTotal. If currentTotal > target remove current total
+        If we make it to the end, and didn't hit target than we know the number X is out
+
+This algo is off, realized that it's not an array of all numbers it's just two numbers that need
+to add up to the target and we can assume that there is only one such answer
+
+Basic
+
+loop all numbers
+var A = firstnum
+
+loop remaining numbers
+var B = nextnum
+
+is A + B = target?
+
+yes: return A, B
+no:
+
+
