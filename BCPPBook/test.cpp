@@ -5,6 +5,8 @@
 #include <bitset>
 #include <tuple>
 #include <typeinfo>
+#include <array>
+#include <string.h>
 
 // Test a define
 #define NUMBER 4
@@ -60,6 +62,224 @@ enum class suits2 {clubs, diamonds, hearts, spades};
 
 // Set data type
 enum class suit : char {clubs, diamonds, hearts, spades};
+
+void memoryArrayPointers()
+{
+   // Address with & deref with *
+   int i = 42;
+   int *pi = &i; 
+   int j = *pi;
+
+    // nullptr for uninit
+    int *ipnull = nullptr;
+
+    // Pointer arithmatic increases by the size of the type pointed to
+    int v[] = { 1, 2, 3, 4, 5 };
+    int *pv = v;
+    *pv = 11;
+    v[1] = 12;
+    pv[2] = 13;
+    *(pv + 3) = 14;
+
+    // Arrays
+    constexpr int sq_size = 4;
+    int squares[sq_size];
+    for (int i = 0; i < sq_size; ++i)
+    {
+        squares[i] = i * i;
+    }
+    for(int i : squares)
+    {
+        cout << i << endl;
+    }
+    
+    // find out size / length
+    int sq_sizeof = sizeof(squares);
+    int sq_count = sizeof(squares) / sizeof(squares[0]);
+    //int sq_count2 = _countof(squares);
+
+    // as a function parameter arrays go down to a dumb pointer to type
+    // so safecar(int tires[4]) is the same as safecar(int* tires)
+    // Pass an array to a function first dimension of the array is pointer
+
+    // MD arrays
+    int four_by_three[4][3]; // four rows of three columns
+    int two_by_three[2][3] = { 11, 12, 13, 21, 22, 23 }; // read as two groups of three
+    int two_by_three2[2][3] = { {11, 12, 13} , {21, 22, 23} };
+
+    // Passing an MD array the first index is flattened like bool checkThis(int checks[][5]);
+
+}
+
+void stringArrays()
+{
+    char p1[6];
+    //strcpy_s(p1, 6, "hello");
+    char p2[6];
+    //strcpy_s(p2, 6, p1);
+    // strcpy_s copy characters fromthe pointer in the last parameter (until NULL) into the first parameters
+    // second param as max size to copy. Note we can't compare p1 and p2 as the pointers are different.
+
+    // String comparison functions return an int not bool. If operand > parameter returns positive, if paramters is >    // the operand then returns -. Returns zero if the same. Overloaded == for std:: string
+
+}
+
+void basicPointers()
+{
+    // Not much reason to use anymore. Use null_ptr for pointers to deallocated memory
+    // Pointers point to a specific type unless void* such as returned by malloc
+
+    // Const can be funky syntax
+    char c[] { "hello" }; // c as a pointer
+    *c = 'H';             // Ok, can change the data pointed at
+    const char *ptc {c};  // Pointer to constant character
+    cout << ptc << endl;   // Ok, can read the memory pointed to
+    //*ptc = 'Y';           // Not allowed, cannot write over the constant char data
+    char *const cp {c};   // Constant pointer to character
+    *cp = 'y';            // Can write to the char data
+    //cp++;                 // Not allowed, cannot change where the pointer points
+    // Read the name right to left to get the correct terms "ptr to const char" "const ptr to char"
+
+    // static_cast to convert pointer type pointed at
+    // int *pi = static_cast<int*>(malloc(sizeof(int))));
+    // reinterpret_cast does the same with zero type checking
+    
+    // Allocations return typed pointer
+    int *p = new int; // allocate memory for one int
+    delete p;
+
+    // delete calls destructor
+
+    // Can initialize at new time
+    int *p1 = new int (42);
+    int *p2 = new int (42);
+
+    delete p1;
+    delete p2;
+
+    // Also allocate arrays
+    int *pa = new int[2];
+    pa[0] = 1;
+    *(pa + 1) = 2;
+    delete []pa;
+
+    // if allocation on new fails std::bad_alloc exception is thrown
+}
+
+void references()
+{
+    int i = 42;
+    int& ri = i;
+    ri = -1;
+    int& ri2 = {i};
+    ri2 = 2;
+
+    // Reference is an alias to an object
+    // it's an alias to the variable's name, can be used where ever the var name would be
+    // Can only exist when initialized to a variable and only ever an alias to that one variable
+
+    int j = 42;
+    const int& rj = j;
+    // Can't do rj = 99 as it's const for the data in ref
+    
+    // references are used when we don't want to be making copies all over the place
+    // for example stream operators use them ostream& operator<<(ostream& _Ostr, int _val)
+    // Need to be careful when returning a ref since you must ensure that object lifetime lasts
+    // as long as the reference. Don't return a ref for a variable that is function scoped
+
+    // for a const reference C++ will create a temp variable for the reference to use
+    const int& cri { 42 };
+    // temp int is created and aliased to cri. available to the ref while it is in scope
+
+    // ranged for and refs
+    constexpr int size = 4;
+    int squares[size];
+    for (int i = 0; i < size; ++i)
+    {
+        squares[i] = i * i;
+    }
+
+    // j is a copy of the items in squares, we can't change it
+    for (int j : squares)
+    {
+        cout << j << endl;
+    }
+
+    // Now we can actually edit the values
+    for (int& k : squares)
+    {
+        k *= 2;
+    }
+    // alias to actual member
+
+    // can get interesting with 2D arrays
+    int arr[2][3] = { { 2, 3, 4 }, { 5, 6, 7} };
+    
+    // for (auto row : arr)
+    // {
+    //     for (auto col : row) // will not compile
+    //     {
+    //         cout << col << " " << endl;
+    //     }
+    // }
+    // outer loop gets a copy of each row as int[3], can't copy array so get an int*
+    // which the next for can't find an iterator for
+
+    // this actually works
+    for (auto& row : arr)
+    {
+        for (auto col : row)
+        {
+            cout << col << " " << endl;
+        }
+    }
+    // auto hides ugly types. Using a ref means that we have an alias to the int[3] not an int*
+
+
+}
+
+// RValue references added in C++11
+// Lets us know if an rvalue is temporary or not. If temp, won't live after function is complete
+// so we don't have to be careful about it. So for temp objects assignment can just move instead
+// of copying the info. Can prevent an expensive copy, called move semantics.
+
+string global{ "global" };
+
+string& get_global()
+{ return global; }
+
+string& get_static()
+{ static string str { "static" }; return str; }
+
+string get_temp()
+{ return "temp"; }
+
+void moveSemantics()
+{
+    cout << get_global() << endl;
+    cout << get_static() << endl;
+    cout << get_temp() << endl;
+
+    // First two return lived object, last returns a temp
+    // use a reference parameter to pass the objects
+    // Imagine a function use_string(string& myString)
+    // use_string if it manipulated the string would need to first make a copy
+    // because for get global or get static it would be changing the string reference
+    // But for get_temp we could actually manipulate it without the copy as it's just a temp rvalue
+    // Imagine a function use_string(string&& myString)
+    // This version would actually be used if you call it like use_string(get_temp()) or use_string("CString")
+    // The original version would be used for use_string(get_global) or use_string(str)
+    // the new version can operate on the string without making a copy first
+
+}
+
+void STLArray()
+{
+   // STL array class, fixed size arrays on the stack, size known at compile time
+   array<int, 4> arr { 1, 2, 3, 4 };
+   for (int i : arr) cout << i << endl;
+   int aSize = arr.size(); 
+}
 
 void types()
 {
@@ -219,9 +439,33 @@ void aggregatetypes()
 void TypeConversion()
 {
     // Promotion smaller types are promoted to larger types
-    void f(int i);
-    short s = 42;
-    f(s); // s is promoted to int
+    //void f(int i);
+    //short s = 42;
+    //f(s); // s is promoted to int
+
+    // Narrowing coversions go big to small and lose data
+    // int i = 0.0 // converts down to 0 with a complier warning
+
+    // Casting away constness
+    const char* ptr = "12345678";
+    char* pWrite = const_cast<char*>(ptr);
+    pWrite[3] = 'A';
+
+    // static_cast does no runtime check
+    double pi = 3.14159;
+    int pi_whole = static_cast<int>(pi); // No warning for narrowing due to cast
+
+    // reinterpret_cast pointer of one type to another
+    double pi3 = 3.14159;
+    //int i = reinterpret_cast<int>(&pi);
+    //cout << hex << i << endl; // print memory address of pi
+
+    // dynamic_cast for casting with runtime checks
+
+    // you can cast with initializer list
+    double pi2 = 3.14159;
+    //int i = {pi}; // will warn on narrowing
+
 }
 
 void looping()
@@ -275,6 +519,60 @@ void input()
             std::cout << "other" << std::endl;
             break;
     }
+}
+
+// functions
+
+// You can use a function before you define it with a forward declaration
+int myMult(int, int);
+
+int myOtherFunction()
+{
+    myMult(5, 6);
+}
+
+int myMult(int lhs, int rhs)
+{
+    return lhs * rhs;
+}
+// If you add extern on the prototype you define that it is defined in another file
+// Static on prototype indicates internal linkage and name can only be used in current file
+
+// constexper if parameters are literals you can mark a function like this (also one line)
+// makes it generated at compile time.
+// inline suggests to the compiler that instead of a jump actually insert in function body
+
+// Can write return value like so return type can be deduced if you omit the last bit
+inline auto MyMult2(int lhs, int rhs) -> int
+{ return lhs * rhs; }
+
+// Mark with noexcept if it doesn't throw an exception
+int increment(int param) noexcept
+{ return param++; }
+
+// Function parameters can do basic conversions if no specific overload is available.
+// If you pass a temp to const & parameter it will make a copy to use
+
+// Passing an initializer list
+struct myPoint {int x; int y; };
+void set_point(point pt);
+
+int setPoints()
+{
+    point p;
+    p.x = 1; p.y = 1;
+    set_point(p);
+    set_point({ 1, 1});
+    return 0;
+}
+// Since this is pass by value the compiler creates a new point on the stack in the function
+
+// default parameters. If not specified, use the default value. Done at declaration, not prototype
+// always put default parameters on the far right
+void log_message(const string& msg, bool clear_screen = false)
+{
+    if (clear_screen) { };
+    cout << msg << endl;
 }
 
 // Entry point
