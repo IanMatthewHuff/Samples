@@ -575,6 +575,61 @@ void log_message(const string& msg, bool clear_screen = false)
     cout << msg << endl;
 }
 
+// Pass by reference here as an out parameter. Lets us actually change the vector
+bool get_items(int count, vector<int>& values)
+{
+    for (int i = 0; i < count; ++i)
+    {
+        values.push_back(i);
+    }
+    return true;
+}
+
+// pointer to pointer to have a pointer as an out parameter
+
+// Pre and post conditions. Assumptions about the data coming in and coming out of a function
+
+// If you leave off the () on a function you actually get the function address
+int getMyStatus()
+{
+    return 1;
+}
+
+void functionPointers()
+{
+    void *pv = getMyStatus;
+    int (*fn)() = getMyStatus; // Pointer to a function
+    int error_value = fn();    // Now call the function via the pointer
+
+    // Can often use an alias
+    // using pf1 = int(*)();
+    // typedef int (*pf2)();
+    // using MyPtr = bool(*)(MyType*, MyType*)
+    // Parens are used to break the associativity of the * operator    
+
+    using callback = void(*)(const string&);
+
+    void big_routine(int loopCount, const callbackProgress)
+    {
+        for (int i = 0; i < loopCount; ++i)
+        {
+            if(i % 100 == 0)
+            {
+                string msg ("loop ");
+                progress(msg);
+            }
+        }
+    }
+
+    void monitor(const string& msg)
+    {
+        cout << msg << endl;
+    }
+
+    big_routine(1000, monitor);
+}
+
+
 // Entry point
 int main(int argc, char *argv[])
 {
