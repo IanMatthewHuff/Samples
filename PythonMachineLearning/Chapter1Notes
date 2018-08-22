@@ -1,0 +1,56 @@
+Supervised Learning - Labeled Data, Direct Feedback, Predict outcome / future
+Unsupervised Learning - No Labels, No Feedback, Find hidden structures in data
+Reinforcement Learning - Decision Process, Reward system, Learn Series of action
+
+* Supervised learning - Training data has labels, desired output signals (labels) are already known
+Picture e-mail spam fiter where we start with a list of mails already correctly marked as spam
+
+Classification is trying to predict the class labels of new instances based on past observations
+class labels are discrete unordered values that are the group memberships of instances
+labels don't have to be binary (spam / not spam) - multiclass classification could 
+take a handwritten letter and determine if it is a - z
+
+Aside from classification we can predict continious outcomes called regression analysis
+Given predictor (explanatory) variables and a continuous response variable (target / outcome)
+try to find a relationship to explain the outcome
+
+ex. Time spent studying -> SAT test score
+
+* Reinforcement Learning - develop a system (agent) that gets better based on interaction
+with environment. Feedback via a "reward signal"
+
+ex. Chess program. Win or loss at the end is the reward signal. The board state is
+the environment here
+
+Try to maximize reward at each state of environment, like losing a piece or better board control
+
+* Unsupervized learning - we don't have a known label or reward function with the data here.
+Clustering or unsupervized classification to find unknown groups or relationships
+Dimensionality reduction - reduce dimensions of data for better analysis and to reduce noise
+
+* basic terms and notation
+
+Basic table info
+
+Flowers
+Sample #    length     width    class
+1           4.1         7.4     Setosa
+2           3.8         8.1     Versicolor
+
+and so on
+
+Data points are "features" length and width
+ Each sample represented by a row in a matrix for linear algebra
+
+in this book i is trainging sample j is dimension of training data
+
+** Roadmap for ML systems
+    Preprocessing - getting data into shape
+        reduce dimensions, scale data to match, remove noise
+    Training and selecting predictive model
+        every algorithm has pros and cons to it
+        get a metric to determing the best, such as classification accuracy
+    Evaluating models and predict unseen data
+        Separate initial data into training set and test set
+        Train with the training set then use test set which is separate to verify accuracy
+

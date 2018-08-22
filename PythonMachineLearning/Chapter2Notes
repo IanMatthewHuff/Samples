@@ -1,0 +1,35 @@
+Chapter 2: Training Simple Machine Learning Algorithems for classification
+
+Artificial Neurons
+Decision Function - Linear combination of input values X and weight values W where
+Z is the so called net input. Z = X1W1 + X2W2 +...
+If next input of a specific sample is > Om (Omega threshold value) we predict class 1
+if not then we predict class -1
+
+W0 = -Om  is the bias unit
+
+http://www.cs.cmu.edu/~zkolter/course/linalg/linalg_notes.pdf
+Linear Algebra notes
+    Row first, then column
+
+
+The preceptron learning rule
+    Mimic how a single neuron works, either it fires or it doesn't
+    1. Initialize the weights to zero or a small random number
+    2. For each training sample x(i) 
+        a. Compute the output value
+        b. Update the weights
+    Here the output value is the class label predicted by the unit step function defined earlier
+    Weight values are updated by the preceptron learning rule. Computed with actual data class
+    value and predicted class value
+    If prediction is correct weight value does not change
+    For a wrong prediction, weight is pushed in the direction of the positive or negative class
+
+    Note that some data sets are not linearly separable. Preceptron won't converge in this case
+    for that case we need to set a limit of passes (epochs) or threshold for miss classifications
+
+    To extend single class classifcation to multi class we can use One-versus-Rest (OvR)
+    Train one classifier per class, Then when adding a new class use the classifier with the
+    highest confidence
+
+    
