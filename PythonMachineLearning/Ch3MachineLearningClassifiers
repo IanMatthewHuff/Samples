@@ -1,0 +1,84 @@
+A tour of machine learning classifiers using scikit-learn
+
+Choosing a classification algorithm - No single classifier works best
+Should almost always consider at least a handful.
+
+Main workflow
+1. Select features and collect training samples
+2. Choose a performance metric
+3. Choose a classifier and optimization algorithm
+4. Evaluate the performance of the model
+5. Tune the algorithm
+
+sci-kit learn has a selection of good algorithms in it
+encode class labels in ints not strings for speed and perf
+train_test_split function to break up our training data
+stratify keeps proportions of classes in each set of data
+
+Scale and standardize the features in the data
+Perceptron object in scikit-learn
+After training the model can use predict method to predict new data
+metrics module can get different metrics on the trained model
+plot_decision_regions to plot how the samples are classified visually
+
+* Modeling class probablities via logistic regression
+Preceptrons are nice and simple but they will never converge if the classes
+are not perfectly linearly separable. We can increase epochs, but lets look at
+a different algorithm instead
+
+Logistic regression is easy to implement and performs very well on linearly
+seperable classes. One of the most widly used algorithm in the industry. For binary
+classification but can use OvR to extend to multi class.
+
+Odds of a particular event are: p / (1-p)
+Think of the positive event as a class label
+logit(p) = log(p/(1-p))
+conditional probablily that a sample belongs to class 1
+inverse form of logit function is sigmoid function
+S-Shaped curve that passes from 0.0 to 1.0, center at 0.5
+
+in Adaline we have a linear activation function. Logistic regression replaces this
+with the sigmoid function. Sigmoid = conditional probability that a sample belongs in
+class A given its input vector x
+
+Logistic regression useful for not just classification, but for the amount of classification
+for something like weather. Not just rain or not rain but percent of rain
+
+Cost function penalizes incorrect guesses up to infinity so increasing amounts of weight added
+for guesses that are further wrong
+
+scikit-learn LogisticRegression class it's OvR by default
+
+Overfitting is a problem in machine learning where a model works well with training data
+but does not work with unseen generalized data. High variance, can be caused by too many
+parameters which complicate the model. 
+
+Underfitting (high bias) is where we don't have enough parameters which means the model is not
+complex enough to handle actual real world data.
+
+Regularization to help tune this. Basically if you are getting bad fits introduce more data to 
+penalize extreme weight values. 
+
+* Maximum margin classification with support vector machines
+SVM = Support Vector Machine
+Commonly used extension of the perceptron. Perceptron looks to minimize classification errors
+SVM optimization objective is to maximize the margin. This "margin" is defined as the distance between
+the separating hyperplane (decision boundary) and the training samples that are closest to this hyperplane,
+the so called support vectors. 
+
+Basically finds the line on the classification graph that creates the most distance from the nearest items.
+All negative samples should fall behind the negative hyperplane and all positive samples ahead of the 
+positive hyperplane. 
+
+* Dealing with non-linearly seperable case using slack variables
+Soft-margin classification. Slack variable to allow convergence in nonlinearly seperable data allowing for 
+misclassifications with appropriate cost penalization. Can tune the width of the margin that we are allowing
+in SVM classification.
+
+Logistic Regression is easlier to implement and update, but has more outliers versus SVM
+SGDClassifier in scikit-learn
+
+* Solving nonlinear problems using a kernel SVM
+SVMs can be kernalized. We can transform data into higher dimensions to try to divide it.
+
+

@@ -32,4 +32,29 @@ The preceptron learning rule
     Train one classifier per class, Then when adding a new class use the classifier with the
     highest confidence
 
-    
+Adaptive Linear Neurons (Adaline)
+Instead of a step function for classification this uses an activation function before the final classification
+step function. The weights are updated from this activation function, not from the final step function
+
+So the weights can be tweaked on a more fine grained basis. Preceptron (My guess of A was not the true value
+of B, update the weight) versus (My guess of A was almost a guess of B, so I just need to update my weight a
+little bit)
+
+Minimizing Cost Functions with gradient descent
+Key part of supervised learning is a defined objective function to be optimized during the process
+Often this is a cost function where we want to minimize the cost
+Gradient descent - climb down the hill of gradient to find global or local cost
+Wrong step size could overshoot the minimium and get worse each epoch
+
+Improve Gradient descent via feature scaling
+Standardization to have fewer steps with the optimizer
+Centers the cost function around the origin and scales it
+
+Graph epochs versus Sum-squared error to see how well you converge
+
+Stochastic gradient descent - update weights incrementally each sample, not over the sum of samples
+good for working with massive data sets. Can also work with "online learning" where we continually
+add in new samples of data to train with. Mini batch learning is in between stochastic and gradient descent
+as is adds in new small batchs of data as they come in
+
+
