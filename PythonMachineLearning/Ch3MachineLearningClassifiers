@@ -81,4 +81,25 @@ SGDClassifier in scikit-learn
 * Solving nonlinear problems using a kernel SVM
 SVMs can be kernalized. We can transform data into higher dimensions to try to divide it.
 
+* Decision Tree Learning
+Attractive models when we want to be understandable. Look almost like a flowchart that only flows down with questions.
+
+Starting at the root split the data on a the feature that results in largest information gain (IG). Then repeat this procedure at each node until the leaves are pure. If we get all the way to each node being just one class we are prone to overfitting so we often prune the tree by setting a maximum depth for it.
+
+Random forests have become popular in the last decade of machine learning. Bascially they are an ensemble of decision trees. Draw set of N elements. Grow a decision tree from those elements. At each node randomly select d features without replacement. Trees do majority voting together to define the final class. Harder to visualize, but often solid results versus single trees. 
+
+* K-nearest neighbors - KNN. Lazy learner as it memorizes the training data. 
+
+Parametric - estimate parameters from the training dataset to larn a function to classify new data points.
+Non-parametric - No fixed set of parameters, number of parameters grows with training data. 
+
+1. Choose the number of K and a distance metric
+2. Find the k-nearest neighbors of the sample to classify
+3. Assign the class label by majority vote
+
+Basically is it closer to elements of class A, B, or C? Then classify based on that.
+
+Good in that the classifier immediatly adapts as we add new training data. Downside is compultational complexity for classifying new samples grows linearly with number of samples in training dataset.
+Right choice of K is important to not underfit or overfit. 
+Can suffer from curse of dimensionality. If there are more and more dimensions on a fixed size training set even close neighbors will start to be far away.
 
