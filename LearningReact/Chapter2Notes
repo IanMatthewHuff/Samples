@@ -1,0 +1,101 @@
+ES6 Notes
+
+instead of just var we can use
+"const" value cannot be changed
+
+"let" to scope variable to a defined code block
+var topic = "javascript"
+if (topic) {
+    let topic = "react"
+}
+global value is protected outside of scope
+can also use in for loop declaration to not create a global variable
+
+traditional string concat
+console.log(lastName, ", " + firstName + " " + middleName)
+
+with a template
+console.log('${lastName}, ${firstName} ${middleName}')
+any javascript that returns a value can be added to template string
+
+very helpful for formatting HTML in JSX
+
+default parameters like so:
+function logActivity(name="Ian Huff", activity="skiing") {
+    console.log('${name} loves ${activity}')
+}
+
+arrow functions
+var lordify = function(firstname) {
+    return '${firstname} of Canterbury'
+}
+console.log(lordify("Ian"))
+
+var lordify = firstname => '${firstname} of Canterbury'
+
+more than one argument needs ()
+var lordify = (firstName, land) => '${firstname} of ${land}'
+
+for more than one line functions we need to use brackets
+arrow functions don't block the scope of this
+
+promise functions use .then for continuation after the promise is fufilled.
+
+ES6 introduces classes to JS
+OLD:
+function Vacation(dest, length) {
+    this.dest = dest
+    this.length = length
+}
+Vacation.prototype.print = function () {
+    console.log(this.dest + " | " + this.length + " days")
+}
+var maui = new Vacation("Maui", 7)
+maui.print()
+
+NEW:
+class Vacation {
+    constructor(dest, length) {
+        this.dest = dest
+        this.length = length
+    }
+    print() {
+        console.log(this.dest + " | " + this.length + " days")
+    }
+}
+still the same under the surface
+const trip = new Vacation("Santiago", 7)
+trip.print()
+
+then
+class Expedition extends Vacation {
+    constructor(dest, length) {
+        super(dest, length)
+    }
+    print() {
+        super.print()
+        console.log('More here')
+    }
+}
+
+you still have the same prototype under the surface
+
+export can be used to export stuff from a module
+
+export const print(message) => log(message, new Date())
+
+const freel = new Expedition()
+export default freel
+// used to export only one type
+
+import {print, log} from './text-helpers'
+import freel from './mt-freel'
+
+Those import into the default namespace, you can also alias like so
+import { print as p, log as l } from './text-helpers'
+p('print a message')
+
+import * as fns from './text-helpers'
+
+
+

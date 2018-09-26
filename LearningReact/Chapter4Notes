@@ -1,0 +1,18 @@
+Updating the DOM with new elements is slow for performance.
+
+React solves with with a virtual DOM. In that virtual dom we have elements that look like HTML, but are actually JavaScripts elements.
+
+Browser DOM is made of DOM elements. React DOM is made of React elements. A react elements is a description of what the DOM element should look like.
+
+For example:
+React.createElement("h1", null, "Baked Salmon")
+
+React.createElement('h1",
+            {id: "recipe-0", 'data-type': "title"},
+            "Baked Salmon"
+)
+
+Turns into:
+<h1 data-reactroot id="recipe-0", data-type="title">Baked Salmon</h1>
+
+
