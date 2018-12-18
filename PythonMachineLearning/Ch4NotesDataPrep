@@ -1,0 +1,42 @@
+Dealing with missing data is common in real world applications.
+
+Pandas dataframe replaces missing values with NaN. 
+df.isnull().sum will sum null values per item.
+
+scikit-learn developed for working with NumPy arrays. Can still be better sometypes to preprocess with pandas.
+
+df.values will get the underlying numpy array from a dataframe
+
+df.dropna(axis=0) drops items with missing values
+(axis=1) to drop columns
+
+df.dropna(how='all') // drop if all columns are na
+df.dropna(thresh=4)  // need four real values to not get dropped
+df.dropna(subset=['C']) // drop items with NaN in C column
+
+mean imputation to replace missing values with the mean of the rest of the column
+
+scikit-learn has transformer classes for data transformation
+fit and transform are the essential methods
+
+*** Handling Categorical Data ***
+Ordinal Features - Category values that can be sorted (t-shirt sizes S,M,L)
+Nomial Featues - Don't imply an ordering (red > blue doesn't make sense)
+
+Use map to map the string for size into an encoded number
+
+Class labels usually provided as integer arrays
+
+class_mapping = {label:idx for idx,label in
+                enumerate(np.unique(df['classlabel']))}
+
+Creates a class mapping of our strings to a label integer
+
+Already has a LabelEncoder class in scikit-learn to work with this
+
+Problem here if we feed things in now is that we are impying an ordering 1,2,3 where there is not one
+Instead we do one hot encoding. This makes each classname a category and assignes a yes no values to it
+So instead of blue, green, red => 0, 1, 2 we do => B,G,R 100, 010, 001
+scikit-learn has a OneHotEncoder for this.
+
+
