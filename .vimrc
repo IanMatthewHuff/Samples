@@ -6,7 +6,7 @@ set ignorecase
 set smartcase
 
 " Color theme
-colorscheme desert
+colorscheme morning
 
 " Better file searching
 set wildmenu
