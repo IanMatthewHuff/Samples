@@ -39,4 +39,31 @@ Instead we do one hot encoding. This makes each classname a category and assigne
 So instead of blue, green, red => 0, 1, 2 we do => B,G,R 100, 010, 001
 scikit-learn has a OneHotEncoder for this.
 
+Selecting meaningful Features
 
+If a model performs better on training data than real data that points to overfitting. Meaning that it fits
+the test data super well, but does not generalize well to real world data complexity.
+
+Ways to solve overfitting
+1. Collect more training data
+2. Penalty for complexity via regularization
+3. Choose a simpler model with fewer parameters
+4. Reduce dimensionality of the data
+
+Regularization penalizes large weights in the cost function
+
+Minimize penalty around the origin then first the cost minimum inside that area. 
+penalty feature of scikit-learn provides this
+
+Dimensionality Reduction
+1. Feature selection to select a subset of the initial Features
+2. Feature extration to derive information from the feature set to construct new feature subspace
+
+Sequential feature selection algorithms look to select the features most useful for reducing errors
+
+Sequention Backwards Selection SBS - At each stage remove the feature that causes the least performance loss
+when removed. Greedy algo to reduce features.
+
+SBS not in scikit-learn yet
+
+Use random forest to compute the feature importance of each feature.
