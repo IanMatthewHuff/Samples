@@ -1,0 +1,19 @@
+*** Sentiment analysis
+
+Uses NLP (natural language processing) to determine if reaction is positive or negative.
+
+Computation of things like this locally can be very expensive
+
+Use out of core learning to deal with larger datasets that can't fit into memory
+
+*** Topic modeling
+
+Assign topics to unlabeled text documents
+
+Unsupervized clustering application
+
+input is bag of words. Output is document to topic matrix and word to topic matrix
+
+Exclude words that are too frequent accross documents. This is a hyper parameter that you can tune
+
+Find the top 5 words per topic cluster. Looking at it you can see what type of movies each referes to
