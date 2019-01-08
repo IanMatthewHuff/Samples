@@ -1,0 +1,46 @@
+*** Ensemble learning
+
+1. Make Predictors based on majority voting
+2. Use bagging to reduce overfitting 
+3. Apply boosting to create powerful models from weak learners that learners
+
+Combine multiple classifiers into a meta-classifiers
+
+Majority voting - pick classes that are picked by majority > 50% of classifiers
+
+For multiclass issues we use plurality voting
+
+Start by training m different classifiers
+
+These ensembles can work based on combinatorics. Assuming independent error rates from each classifiers
+
+As long as base classifiers are better than random guessing ensemble is almost always better
+
+*** bagging
+In ensemble training we are using the same set of training data to train each classifier.
+
+In bagging we draw bootstrap samples from the initial training set to train each classifier.
+
+Random forests are essentially a special case of bagging
+
+Bagging can decrease overfitting
+
+Bagging can't help to reduce bias. So use on classifiers with low bias
+
+*** Adaptive boosting (AdaBoost)
+
+Ensemble with very weak basic classifiers, just better than random guessing like a decision tree stump
+then let the learners get better as they misclassify
+
+Random subsets of training data without replacement.
+
+Train 1 with random subsets
+Train 2 with x new samples and 50 of misclassified from 1
+Train 3 On samples that 1 and 2 disagree on
+
+Combine 1 - 3 with majority voting
+
+More weight to misclassified samples in training
+
+Note that ensemble techniques always have a computational tradeoff as they are doing more work
+
