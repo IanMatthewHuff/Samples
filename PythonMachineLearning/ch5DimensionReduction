@@ -1,0 +1,27 @@
+Chapter 5: Compress data via dimensionality reduction
+
+Similar to feature extraction we are looking to reduce the number of features in the dataset
+
+In feature extraction we keep the same features, but in dim. reduction we transform to a new feature space
+
+** PCA - Principal Component Analysis **
+Unsupervised, so no class data
+Identify patterns in data based on feature correlation
+
+Need to standardize the data first as PCA is sensitive to this.
+
+Select the eigenvectors with most of the information (varience)
+Use transformation matrix to move from d dim to k dim where k << data
+
+PCA transform class in scikit-learn
+
+** LDA linear discriminate analysis
+Supervised so uses class data
+Finds the feature subset that optimizes class separation. 
+
+** Kernel principal component analysis
+With non-linearly seperable data linear methods like LDA and PCA might not work well
+
+With non-linearly seperable data we could project into higher dims to make it seperable
+Use kernel PCA to project into higher dimension then use standard PCA to reduce down
+
