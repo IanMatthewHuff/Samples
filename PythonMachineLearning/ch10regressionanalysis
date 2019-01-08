@@ -1,0 +1,41 @@
+** Regression analysis 
+
+Regression analysis predicts target variables on a contiuous scale not in classes
+Like predicting stock prices or weather
+
+** Linear Regression
+
+Model the relationship between one or multiple features and a continous target variable
+
+Learn the weight of the linear equation to describe the relationship between the explanatory variable
+and the target variable 
+
+Find the best fitting straight line through the sample points
+
+check the vertical offset from each sample point to the line
+reduce these offsets as much as we can
+
+multiple linear regression creates instead a hyperplane
+Hard to visualize these, so we mostly stick to 2D
+
+Exploring the housing data set
+
+Exploratory data analysis - simple techniques to examine the dataset
+
+Seaborn can create a pairplot to check the relationship between two variables in the dataset
+Can create an entire scatterplot matrix of these charts
+
+** Correlation matrix
+
+like a covariance matrix
+
+Can create a heatmap of correlations between features
+
+For a linear regression we want to pick features with high correlation with target prediction feature
+
+we want to define a cost function to use gradient descent on
+
+Check to see how many epoces it takes to converge
+
+scikit-learn can use liblinear to better optimize
+
