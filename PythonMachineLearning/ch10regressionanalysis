@@ -39,3 +39,36 @@ Check to see how many epoces it takes to converge
 
 scikit-learn can use liblinear to better optimize
 
+*** Robust regression with RANSAC
+
+Linear regression can be hit hard by outliers
+
+RANSAC does a fit only using "inliers" in the dataset
+
+Select random set of samples to be inliers
+Test other data points and add those that fit the tolerance to be inliers
+Refit the model using all inliers
+Estimate the error and stop if we reach a specific tolerance
+
+*** Evaluating the perf of linear regression models
+Residuals is the diff between actual and predicted values. We can plot these in situations
+where there are multiple explanitory variables
+
+We would expect random distribution of residuals around the X = 0 centerline to account for small
+mispredictions in either direction
+
+Mean Squared Error (MSE) 
+coefficent of determination = standardized version of MSE
+
+*** Using regularized methods for regression
+Regularization solves overfitting by creating a penalty on complexity
+
+Ridge regression adds sum squared of weights to least-squares cost function
+
+Also LASSO
+
+*** Turning linear into a curve - Polynomial regression
+d = degree of polynomial so d=2 is a quadratic
+In scikit-learn you can add PolynomialFeatures to LinearRegression fitting
+
+Note that adding higher degrees can lead to a good fit on test data, but overfitting on real data
