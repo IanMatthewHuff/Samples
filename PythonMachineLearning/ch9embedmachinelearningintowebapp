@@ -1,0 +1,13 @@
+*** embed machine learning
+
+Python pickle module can serialize and deserialize python objects.
+We can use that to save and load state of classifier
+
+joblib can be used better to serialize numpy arrays
+
+Be careful to not deserialize untrused data as it executes on deserialize
+
+** Flask
+
+Flask = lightweight python web server
+

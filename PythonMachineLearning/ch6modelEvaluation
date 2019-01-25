@@ -1,0 +1,93 @@
+*** Model evaluation
+
+1. Unbiased estimate of model performance
+2. Diagnose common model problems
+3. Fine tune machine learning models
+4. Evaluate predictive models
+
+Scikit-learn Pipeline captures set of fit / transform methods
+
+Fit on the pipeline applies to all of the lower level items
+
+Predict on the pipeline takes new data and uses the pipeline to predictive
+
+The last step on the pipeline needs to be an estimator
+
+Standard order -> Scaling, Dim Reduction, Learning Algorithem, Predictive Model
+
+Underfitting (high bias) if model is too simple
+Overfitting training data (high varience) if model is too complex
+
+** holdout cross validation
+
+Split into test and training dataset
+
+When picking a model we want to tune model hyperparameters. However if we use the training data for this
+it becomes part of the model and we are more likely to overfit.
+
+Instead with holdout devide into training, validation, and test sets. Training set to fit different models
+performance on validation set used for model selection. This separates test set totally from model creation.
+
+Issue here is this might make us sensitive to how we split our training and validation data sets
+
+** K-fold cross evaluation
+Randomly split training data into k folds. k-1 for model training and 1 fold for performance evaluation
+Repeat k times so k models and perfomance estimates.
+
+Calculate average performance of models based on the k models. Typically used to find hyperparameters
+
+When satisfactory hyperparameters found retrain on complete model set for a final performance estimate
+K = 10 is a good basic amount to balance bias and variance
+
+*** Debugging algorithms with learning and validation curves
+
+Scikit learn can create learning curves to see how training and validation accuracy change
+
+You could chart this against something like number of samples or versus a hyperparameters
+
+Grid search can be used to find optimal set of hyper parameters
+
+Brute force search of hyperparameter combos
+
+Very expensive methods
+
+** Nested cross validationn
+
+outer k-fold cross-validation loop to split for training and test folds
+inner loop to select the model using k-fold cross validation on the training fold
+
+*** Different performance metric evaluations
+
+Confusion matrix
+
+                    Predicted Class     P           N
+    Actual Class
+            P                       True Positive   False Negative
+
+            N                       False Positive  True Negative
+
+Matplotlib can use matshow to visualize this from the results
+
+error (ERR) and accuracy (ACC) provide info about misclassified samples
+
+There are also true positive and false positive rates. Precision and recall related to theses
+
+Combo of PRE and REC often used called F1-score
+
+Reciever Operating Characteristic ROC graphs are useful for classification.
+
+Diagonal of ROC graph is equal to random guessing. We want to see the area above to diagonal for how much better
+any method is versus just guessing
+
+The above are all for binary, but using OVA (one over all) we can extend these to multiclass issues
+
+*** Dealing with class imbalance
+
+Samples from one class might be overrepresented in the sample data. Common in real world data.
+
+For example: Data with 90% healthy people and 10% breast cancer. Just predicting healthy can get us to 
+90% accuracy. 
+
+Can assign a larger penalty to incorrect predictions in the minority class
+Can also upsample the minority class or downsample the majority class
+

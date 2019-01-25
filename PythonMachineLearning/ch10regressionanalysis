@@ -1,0 +1,81 @@
+** Regression analysis 
+
+Regression analysis predicts target variables on a contiuous scale not in classes
+Like predicting stock prices or weather
+
+** Linear Regression
+
+Model the relationship between one or multiple features and a continous target variable
+
+Learn the weight of the linear equation to describe the relationship between the explanatory variable
+and the target variable 
+
+Find the best fitting straight line through the sample points
+
+check the vertical offset from each sample point to the line
+reduce these offsets as much as we can
+
+multiple linear regression creates instead a hyperplane
+Hard to visualize these, so we mostly stick to 2D
+
+Exploring the housing data set
+
+Exploratory data analysis - simple techniques to examine the dataset
+
+Seaborn can create a pairplot to check the relationship between two variables in the dataset
+Can create an entire scatterplot matrix of these charts
+
+** Correlation matrix
+
+like a covariance matrix
+
+Can create a heatmap of correlations between features
+
+For a linear regression we want to pick features with high correlation with target prediction feature
+
+we want to define a cost function to use gradient descent on
+
+Check to see how many epoces it takes to converge
+
+scikit-learn can use liblinear to better optimize
+
+*** Robust regression with RANSAC
+
+Linear regression can be hit hard by outliers
+
+RANSAC does a fit only using "inliers" in the dataset
+
+Select random set of samples to be inliers
+Test other data points and add those that fit the tolerance to be inliers
+Refit the model using all inliers
+Estimate the error and stop if we reach a specific tolerance
+
+*** Evaluating the perf of linear regression models
+Residuals is the diff between actual and predicted values. We can plot these in situations
+where there are multiple explanitory variables
+
+We would expect random distribution of residuals around the X = 0 centerline to account for small
+mispredictions in either direction
+
+Mean Squared Error (MSE) 
+coefficent of determination = standardized version of MSE
+
+*** Using regularized methods for regression
+Regularization solves overfitting by creating a penalty on complexity
+
+Ridge regression adds sum squared of weights to least-squares cost function
+
+Also LASSO
+
+*** Turning linear into a curve - Polynomial regression
+d = degree of polynomial so d=2 is a quadratic
+In scikit-learn you can add PolynomialFeatures to LinearRegression fitting
+
+Note that adding higher degrees can lead to a good fit on test data, but overfitting on real data
+
+*** Non-linear relationships using random forests ***
+Random forest regressions. Can look at piecewise linear functions
+
+Looking at residuals in data we can look to see if we see patterns there. If so, we might be missing explanatory data
+
+
