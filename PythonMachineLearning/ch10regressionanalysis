@@ -72,3 +72,10 @@ d = degree of polynomial so d=2 is a quadratic
 In scikit-learn you can add PolynomialFeatures to LinearRegression fitting
 
 Note that adding higher degrees can lead to a good fit on test data, but overfitting on real data
+
+*** Non-linear relationships using random forests ***
+Random forest regressions. Can look at piecewise linear functions
+
+Looking at residuals in data we can look to see if we see patterns there. If so, we might be missing explanatory data
+
+

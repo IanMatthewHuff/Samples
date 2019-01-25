@@ -1,0 +1,116 @@
+*** Working with unlabeled data: Clustering ***
+
+Previous to now we've been working with class lablels. Now to look at unlabled data
+
+Goals is to find natural groupings in data sets
+
+*** Similarity using k-means ***
+K-means is popular is it is both effective and easy to explain
+
+It's a type of prototype based clustering
+
+Prototype represents each cluster as a prototype. Either a 
+Centroid: average of similar points or
+Medoid: Most representative point
+
+k-means is good at picking out clusters with spherical shape
+One downside is we have to pick k before hand
+
+We can use methods try to pick the correct value of k
+
+Four steps
+1. Randomly pick k centroids from the sample points as initial cluster centers
+2. Assign each sample to the nearest centroid
+3. Move centroids to the center of the samples that were assigned to it
+4. Repeat 2/3 until cluster assignments do not change or a user defined number of iterations
+
+Similarity = opposite of distance
+
+Use squared Euclidean distance in m dimensional space
+
+Clusters do not overlap and are not hierarchical
+
+*** K-means++ ***
+Fix to k-means to pick better starting locations
+
+Better than random way to pick the locations for the starting centroids
+
+Used to place initial centroids as far apart as possible which gets better sorting
+
+This is actually the default for scikit-learn
+
+*** hard versus soft clustering ***
+In hard clustering (like k-means) each sample is assigned to just one cluster
+In soft clustering samples are assigned to one or more clusters
+
+We get a set of probablities that a sample is in each cluster. Sparse vector of binary values
+
+Sum of memberships for a given sample is 1
+
+Functions with the same basic steps as k-means. Just with updating cluster memberships
+
+Fuzzy co-efficent to control how fuzzy matches are allowed.
+Larger values allows for bigger / fuzzier clusters
+
+*** Elbow method to find optimal number of clusters ***
+Harder to compare performance for unlabeled data
+
+Distortion measures within-cluster SSE. Inertia in scikit-learn
+
+Elbow method we graph distortion versus k values
+At a certain point distortion will drop off. 
+
+*** Qualify clustering via silhouette plots ***
+For sample
+Cluster cohesion - average distance to all other points in same cluster
+Cluster separation - average distance to all other points in nearest cluster
+
+Silhouette is difference between cohesion and separation dividied by greater of two
+
+scikit-learn has silhouette_scores to create average sil values over all samples
+
+sil coefficents near zero are bad, we want to avoid that
+
+*** Organizing clusters as a hierarchical tree ***
+hierarchical clustering versus prototype based
+
+Divisiv start with one cluster for all samples, then split until each cluster only has one sample.
+Agglomerative does the opposite to merge clusters together.
+
+Single linkage - compute distances between most similar members for each par of clusters and merge the two clusters for 
+which the distance between the most similar members is the smallest.
+Complete linkage- similar, but compare with most dissimilar member
+
+Agglomerative with complete linkage
+1. Compute the distance matrix of all samples
+2. Represent each data point as a singleton cluster
+3. Merge the two closest clusters based on distance of most dissimilar members
+4. Update the similarity matrix
+5. Repeat 2-4 until only one cluster remains
+
+create a distance matrix with pdist
+
+linkage from cluster.hierarchy
+
+Can visualize clustering with dendrogram. Color shows clusters and lines show when they are grouped together.
+
+Practially dendrograms are used with heat maps. Order of rows in heat map reflect clustering of samples
+
+*** DBSCAN Density-based Spatial Clustering of Applications with Noise ***
+
+Assigns lables based on dense clusters of points, not spherical regions. Density defined as number of points
+inside a specified radius epsilon.
+
+Core Point = Specific number of neighbor points (min points) fall inside the specified radius
+Border Point = Point with fewer neighbors than min points in radius but is inside epsilon radius of a core point
+Noise Point = Everything else
+
+Form clusters for each core point or connected group of core points (core points are connected if within epsilon radius)
+Assign each border point to the cluster of the corresponding core point. 
+
+One advantage is that it doesn't assume a spherical shape. Is also capable of removing noise points. Something like 
+k-means can really struggle with something like interlocking half moon shapes. 
+
+Can be hard to find optimum radius and min points values
+
+
