@@ -1,0 +1,47 @@
+*** Implementing a multilayer neural network from scratch ***
+
+Neural networks making a big comeback since the 90s. Heavily invested in currently. 
+
+Back in chapter 2 we looked at a perceptron. Adaline algorithm to before binary classification.
+Gradient descent with weight coefficent. 
+
+We can connect multiple single neurons in a fully connected network called MLP Multi Layer Perceptron.
+
+Input Layer -> Hidden Layer -> Output Layer
+
+More than one hidden layer = deep artificial neural network
+
+Number of layers and units in DNN are hyperparameters that we can tweak
+
+One unit in the output layers is sufficent for binary classification. But with one hot encoding
+we can handle multiple classifications
+
+Activating via forward propagation
+1. Starting at input layer propagate the patterns of the training data
+2. Based on network output calculate the error that we want to minimize using cost function
+3. Backpropagate the error, find derivative with respect to each weight in the network and update model
+
+Repeat those steps for multiple epochs
+
+Feedforward = each layer servers as the input to the next layer without loops
+
+*** Classifying handwritten digits ***
+
+Sample code and implementation here
+
+IMportant to compare training and validation accuracy to tune hyperparameters and not overfit
+
+*** Traning an artificial neural network ***
+
+We have multiple weight matricies. W(h) connects input to the hidden layer. W(out) connects hidden layer to output.
+
+Backpropagation is a very computationally efficent approach to compute the partial derivatives of a complex cost function
+in multilayer neural networks.
+
+DNNs have a large number of weight co-efficents in a high dimension feature space. 
+
+There are tons of local minimums in high dimension space that we have to overcome to find the global minimum
+
+Back prop uses matrix X vector multiplication instead of Matrix X Matrix which is much more efficent.
+
+
