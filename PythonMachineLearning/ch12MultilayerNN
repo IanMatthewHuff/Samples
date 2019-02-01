@@ -44,4 +44,9 @@ There are tons of local minimums in high dimension space that we have to overcom
 
 Back prop uses matrix X vector multiplication instead of Matrix X Matrix which is much more efficent.
 
+Mini-batch learning here computes the gradient based on a single training example. Mini-batch is a special form
+of stochastic gradient descent. It's like polling for a presidential election. 
+
+Multilayer NNs hard to train. Output function has a rough surface and easy to get stuck at a local minimum
+
 

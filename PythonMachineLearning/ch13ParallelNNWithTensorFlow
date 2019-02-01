@@ -1,0 +1,44 @@
+TensorFlow can implement NNs much easier than NumPy basic implementations.
+
+*** TensorFlow and training performance ***
+Python is limited to execution on one core due to Global Interpreter Lock (GIL)
+
+GPUs super cheap for multiple processing like this. Like little mini clusters with tons
+of cores.
+
+We don't want to have to code in CUDA or OpenCL so TensorFlow fills in here.
+
+TensorFlow constructs a directed graph to represent data flow.
+
+There are both high level and low level APIs in TensorFlow to use.
+
+Graph is a set of nodes. Each node represents an operation that may have zero or more input or output.
+The values that flow through the edges of the computation graph are called tensors.
+
+Tensors as a generalization of scalars, vectors, matrices and so on. Scalar = Rank 0 tensor, vector = rank 1
+matrix as rank 2 tensor.
+
+*** Keras and Layers are two high level APIs ***
+Layers makes it easy to define the layers in our network.
+
+Good for quickly prototyping in initial investigations
+
+Keras:
+Keras is a frontend that goes on top of TensorFlow. 
+
+LIke layers easy to simply define NN layers and add them to the graph
+
+We have to make sure that the output from a previous layer matches the input of the current layer
+
+Number of units in output layer should be equal to the number of classes.
+Need to define an optimizer as well.
+
+validation_split parameter is helpful to reserve 10% of the training data per epoch for validation to check for 
+overfitting.
+
+*** Choosing activation functions for MNNs ***
+Technically any differentiable function can be used as an activation function. 
+
+softmax function is a soft form of argmax. Provides a probability for each class.
+
+Class probablities sum up to one.  
