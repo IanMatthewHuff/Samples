@@ -1,41 +1,28 @@
 ''' Here is our first goal view the breakdown of male versus female characters by decade introduced 
 '''
 #%% Initial imports
+import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
 import pandas as pd
+%matplotlib inline
 print('hello world')
 
 #%% Try to just load and see the shape of the data
 df = pd.read_csv('SuperHeroes/Data/marvel-wikia-data.csv')
 df.head()
 
+#%% What are the data types of our columns?
+print(df.dtypes)
 
-#%% Step One - View all dates
-datedf = df[['FIRST APPEARANCE']]
-datedf
+#%% Remove our columns that don't have a year
+df = df.dropna(subset=['Year'])
+df.head()
 
-#%% Step Two - We have NaN columns here, lets drop them
-datedf2 = datedf.dropna(subset=['FIRST APPEARANCE'])
-datedf2
+#%% Create a decade column to bucket the items
+#make_decade = lambda row: (row.Year//10)*10
+#col = df.apply(make_decade, axis=1)
+#df = df.assign(Decade=col.values)
 
-# #%% Step Three A - Define a function to drop the month
-# def reduce_to_year(date_string):
-    # return date_string[-2:]
-
-# #%% Step Three B - Apply that function to create a new INTRO YEAR column
-# year_added_df = df
-# year_added_df['INTRO YEAR'] = year_added_df['FIRST APPEARANCE'].apply(reduce_to_year)
-# year_added_df
-
-# Previous idea was not optimal was passing in a pandas series into the reduce_to_year function
-
-#%% Step Three - Add a new INTRO YEAR column
-year_added_df = df.dropna(subset=['FIRST APPEARANCE']).copy()
-year_added_df['INTRO YEAR'] = year_added_df['FIRST APPEARANCE'][-2:]
-year_added_df
-
-#%% Step Three - Add a new INTRO YEAR column, create a copy here as we are going to add a new column
-# and we want to keep the previous df clean
-year_added_df = df.dropna(subset=['FIRST APPEARANCE']).copy()
-year_added_df = year_added_df.assign(intro_year=lambda x: x['FIRST APPEARANCE'][-2:])
-year_added_df
+#%% Better way to do it if we don't get the copy error
+df['Decade'] = df.apply(lambda row: (row.Year//10)*10, axis=1)
