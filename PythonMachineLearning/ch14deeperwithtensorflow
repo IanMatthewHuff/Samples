@@ -1,0 +1,75 @@
+*** Key Features of Tensorflow ***
+Ability to work with one or multiple GPUs
+Strong growth with Google behind it
+Supports Mobile deployment which is good for production
+
+Tensors are a generalized mathmatical notation for multidim arrays holding
+data values where the dimensionality of the tensor is the rank
+
+scalar = tensor rank 0
+vector = tensor rank 1
+matrix = tensor rank 2
+
+tf.rank to get the rank of a tensor
+X.get_shape() similar to numpy arrays
+
+*** Computation Graphs ***
+Basically break down an equation into individual operations
+
+Computation graph just a network of nodes. Each node = operations
+
+1. Create a new graph
+2. Add nodes (tensors and operations)
+3. Run the graph for this session
+
+To evaluate a tensor all the nodes that go into it will be Run
+
+*** Placeholders in tensor flow ***
+Predefined tensors with specific types and shape
+tf.placeholder function to add them
+
+Like defining a variable with type and rank.
+
+When executing a node in the graph we create a dictionary of values to feed into the
+the placeholder values to populate them.
+
+We can specify None for the shape when we are using data with varying sizes
+
+*** Variables in tensor flow ***
+Special object to store and update parameters of models when running
+
+For example, weights in the input hidden and output layers
+
+tf.Variable and tf.get_variable
+
+Initial values not actually set until we run the graph
+
+Variable scope to organize the variables into separate subparts. 
+Works like a namespace for variables. 
+
+*** Building a regression model ***
+
+*** Executing objects in TensorFlow using names ***
+
+*** Saving and restoring a model ***
+tf.train.Saver class to save a model
+.save method
+
+Uses Protocol buffer as a language agnostic way to serialize data. 
+
+We can recreate the graph and restore the trained model with the meta file
+
+*** Transforming tensors as MD data arrays ***
+
+*** Utilizing control flow mechanics in building graphics ***
+In our code we need to use tf.cond for something like x > y
+If you just use the python operator then it will be static and frozen in the graph
+we need the tf.cond to have it actually apply to each item.
+
+tf.case and tf.while_loop for more control flow
+
+*** Tensor Board ***
+This is a module to create visualizations of the graph
+variable_scope will cause items to get grouped into network boxes. You can expand them to explore inside
+
+
