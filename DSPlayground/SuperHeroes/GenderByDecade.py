@@ -42,3 +42,6 @@ marvel_men_df = df[df.SEX == 'Male Characters']
 plt.hist([marvel_men_df.Year.values, marvel_women_df.Year.values],
     bins=histo_bins, label=['male','female'])
 plt.show()
+
+#%% Start to look at some machine learning here
+# First up is Perceptron
