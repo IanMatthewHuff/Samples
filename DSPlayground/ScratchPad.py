@@ -21,3 +21,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 # stratify on y means the same split of propotions of y class labels in test / train
 
 #%% Scale our features first
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+sc.fit(X_train)
+X_train_std = sc.transform(X_train)
+X_test_std = sc.transform(X_test)
+
+
+#%%
