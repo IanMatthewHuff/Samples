@@ -131,3 +131,48 @@ for i in range(SIZE):
     print('%2d ->' % new_item, my_list)
 
 # Arrays if the list is only numbers array is more efficent. It's as lean as a C++ array
+from array import array
+from random import random
+floats = array('d', (random() for i in range(10**3)))
+
+# reading a big list of floats from a file is way faster with array.fromFile as opposed to strings
+# pickle is also a great way of serializing
+
+# memorview class is a shared memory type to look at slices of arrays without copying bytes
+# inspired by numpy. Memoryview is generalized numpy array structure in python
+# memoryview.cast returns another memory view object sharing the same memory
+numbers = array('h', [-2, -1, 0, 1, 2])
+memv = memoryview(numbers)
+len(memv)
+memv[0]
+memv_oct = memv.cast('B')
+memv_oct.tolist()
+memv_oct[5] = 4
+numbers
+
+import numpy
+a = numpy.arange(12)
+a
+a.shape
+a.shape = 3,4
+a
+a[2]
+a[2, 1]
+a[:, 1]
+a.transpose()
+# high level operations for loading and saving from files
+
+# .append and .pop make lists usable as a queue or stack
+# but insert and remove on the left end is slow is costly as the list must be shifted
+
+# use deque for better perf here
+from collections import deque
+dq = deque(range(10), maxlen=10)
+dq
+dq.rotate(3)
+dq.extend([11, 22, 33])
+dq.appendleft(-1)
+
+# Can consider python seqences mutable or immutable or also 
+# flat or container sequences. Flat = fast / easy, but type limited
+# container = flexible
