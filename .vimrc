@@ -25,3 +25,6 @@ set expandtab
 
 " Indenting
 set autoindent
+
+" ;; to exit insert mode
+inoremap ;; <Esc>
