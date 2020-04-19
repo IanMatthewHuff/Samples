@@ -1,8 +1,0 @@
-Find the longest substring in a string without repeating characters.
-
-Brute force is an order N squared check that need to run over every possible substring over the whole string.
-
-So the main thing that we really want to know is from any one letter how long until that letter shows up again. The letter with the longest distance there is the one that has the longest substring without any repeating characters.
-
-So need an map for each possible character to keep track of this. Or just an array of 26 for each character. :wq
-`
