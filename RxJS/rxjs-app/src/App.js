@@ -8,6 +8,9 @@ function App() {
     <div className="App">
       <Title />
       <Status />
+      <label>Red Count: </label>
+      <p/>
+      <label>Blue Count: </label>
     </div>
   );
 }
