@@ -14,6 +14,29 @@ console.log("5" + 1)
 In example 1 null -> 0, in 2 "5" converted to an int, in 3 "1" converted to a string for concat as + tries
 string concat before addition
 
+If null or undefined on either side only produces true if both sides are one of null or undefined.
 
+null == undefined // true
+null == 0 // false
+
+Can be bad as: 0 == false and "" == false are both true.
+
+Use === and !== to not do any type conversion.
+
+"" === false // false
+
+&& and || convert left side value to a boolean, but may return either the original left hand value or the right hand value.
+
+|| will return value to left if that can be converted to true and value on the right otherwise so:
+null || "user" // "user"
+"Agnes" || "user" // "Anges"
+
+Can be used to fallback to default value
+
+Remember that 0, NaN, and "" all count as falsy
+
+&& works the other way around. If value to the left is something false it returns that, otherwise value on right. 
+
+Right side is never evaluated if not needed. Short-circut evaluation. true || X // X will never evaluated
 
 
