@@ -9,4 +9,4 @@ let one = 1, two = 2;
 Function = piece of program wrapped in a value.
 Values are applied to run the wrapped program.
 
-
+Exercises done
