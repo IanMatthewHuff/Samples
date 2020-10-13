@@ -1,0 +1,12 @@
+Program structure
+
+All variables are bindings, references to values, not values.
+
+Can define multiple vars in one line
+
+let one = 1, two = 2;
+
+Function = piece of program wrapped in a value.
+Values are applied to run the wrapped program.
+
+Exercises done
