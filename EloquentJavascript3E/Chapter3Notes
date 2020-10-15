@@ -25,3 +25,123 @@ So var is visible through the entire function, not just block.
 
 Innermost scope for a function shadows outer scope.
 
+Each scope can also see the scope containing it.
+
+const hummus = function(factor) {
+    const ingredient = function(amount, unit, name) {
+    }
+}
+
+In the example above factor can be seen inside ingredient
+
+Remember that a function can be stored as a value. You can pass it or change binding or other things with it.
+
+let launchMissiles = function() {
+    missile.launch();
+}
+
+if (safeMode) {
+    launchMissiles = function();
+}
+
+There is another way to define a function like so:
+
+function square(x) {
+    return x * x;
+}
+
+Function declaration. Defines the binding square and points at the given function. No semicolon needed at the end.
+
+Function declaration like this is not in normal code flow. It's automatically moved to the top, so it can be called before it is defined.
+
+* Arrow functions
+
+Third notation for functions.
+
+const power = (base, exponent) => {
+    let result = 1;
+    for (let count = 0; count < exponent; count++) {
+        result *= base;
+    }
+    return result;
+};
+
+If only one parameter you can omit the () around it. Also if body is a single expression you can omit the {}
+
+const square = x => x * x;
+
+* The call stack
+
+Current context is stored here when a function is called. When the function returns, the top context on the stack is removed and used to continue execution.
+
+Have to be aware of the space the stack is taking, especially for recursive functions.
+
+* Optional arguments
+
+function square(x) { return x * x; }
+console.log(square(4, true, 'hedgehog'));
+
+Javascript is very broad here. Pass too many, extra are ignored. Pass to few, the rest are given undefined.
+
+But we can use this.
+
+function minus(a, b) {
+    if (b === undefined) return -a;
+    else return a - b;
+}
+
+* Default parameters
+
+function power(base, exponent = 2) {
+    ...
+}
+
+Can call power(4) or power(6, 4)
+
+* Closure
+
+Local bindings are created new for each call.
+
+function wrapValue(n) {
+    let local = n;
+    return () => local;
+}
+
+let wrap1 = wrapValue(1); // wrap1() returns 1
+let wrap2 = wrapValue(2); // wrap2() returns 2
+
+Referencing a specific instance of a local binding in an enclosing scope is call closure. A function that refs bindings from local scopes around it is called a closure.
+
+function multiplier(factor) {
+    return number => number * factor;
+}
+let twice = multiplier(2);
+console.log(twice(5)); // returns 10
+
+!!! Function values contain both the code in their body and the environment in which they are created.
+When called a function body sees the environment which it was created, not the environment it was called !!!
+
+* Recursion
+
+Fine for a function to call itself, just be aware of stack. For JS a small simple loop better than recursion in some cases.
+
+Starting from 1 and either adding 5 or multiplying by 3 how can we produce number target?
+
+function findSolution(target) {
+    function find(current, history) {
+        if (current === target) {
+            return history;
+        } else if (current > target) {
+            return null;
+        } else {
+            return find(current + 5, `(${history} + 5)`) ||
+                    find(current * 3, `(${history} * 3)`);
+        }
+    }
+    return find(1, '1');
+}
+
+* Functions and side effects
+
+Functions can only care about the return value (say returning a calculation) or side effects (say printing a number) or both. Pure functions have no side effects.
+
