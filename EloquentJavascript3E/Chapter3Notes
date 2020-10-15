@@ -1,0 +1,27 @@
+Functions
+
+A regular binding where the value of the binding is the function.
+
+const square = function(x) {
+    return x * x;
+};
+
+console.log(square(12));
+
+Functions can have no parameters like so:
+const makeNoise = function() {
+    console.log("boing");
+};
+makeNoise();
+
+return with nothing returns undefined.
+
+Bindings all have a scope, same for functions. If it's outside of everything, then it's global.
+
+Local bindings to a function created each time a function is called.
+
+Let and const bindings are local to block. Old pre 2015 JS only functions are new scopes. 
+So var is visible through the entire function, not just block.
+
+Innermost scope for a function shadows outer scope.
+
