@@ -1,0 +1,155 @@
+* Data Scructures: Object and Arrays
+
+Array to hold a sequence of values [1, 2, 3, 4]
+
+Values can have properties on them, like x.length.
+
+Can access via value.x or value[x] but these might not be the same. .x is used as the literal name. [x] evaluates the expression between [] to get the property name.
+
+Could use array.length or array['length']
+
+For instance strings have .toUpperCase() and .toLowerCase()
+
+.push adds values to the end of the array. .pop pops off the last value in the array.
+
+Can create objects with { } as an expression.
+
+let day1 = {
+    squirrel: false,
+    event: ["eat", "sleep"]
+};
+
+Properties separated by commas inside the brackets. Properties whos names are not valid binding names must be quoted.
+
+let descriptions = {
+    work: "Went to work",
+    "touched tree": "Touched a tree."
+};
+
+Can assign to property expression with '=' which can reassign the property or create a new one.
+
+delete keyword can remove a property from an object.
+
+in keyword when applied to string or object tells if you if object has property with that name.
+
+If an object property is undefined it still is 'in' the object, but delete totally removes it.
+
+You can use Object.keys function to see the object proprety names.
+
+console.log(Object.keys({x: 0, y: 0, z: 0}));
+// ["x", "y", "z"]
+
+Object.assign copies all properties of one object into another.
+
+* Mutability
+
+Object are mutable and their property values can change over time. Also they cannot be compared as values.
+
+let object1 = {value: 10};
+let object2 = object1;
+let object3 = {value: 10};
+
+object1 == object2 true
+object1 == object3 false
+object1.value = 15;
+object2.value // 15
+
+const score = {visit: 0, home: 0}
+score.visit = 1 // is ok
+score = {visit: 1, home: 1}; // Is not ok
+
+== is identity comparison only. JS has no deep value comparison by default.
+
+* More array stuff
+
+Array.includes for checking if a value exists in array.
+
+Looping over an array.
+
+for (let entry of values) {
+    console.log(`${entry}`);
+}
+
+unshift and shift add and remove from the start of the array, not the back like push and pop
+unshift(value) and shift()
+
+indexOf to search array also lastIndexOf
+
+slice, start and end indices to return only elements between. Start is inclusive, end is exclusive
+[0, 1, 2, 3, 4].slice(2, 4) // [2, 3]
+[0, 1, 2, 3, 4].slice(2) // [2, 3, 4]
+end is not given then slices to the end. omit start to copy array.
+
+concat glues arrays together.
+
+* Strings and properties
+
+string, number, Boolean and not objects, so you can't add a new property to them.
+
+String has slice and indexOf like arrays do
+
+trim removes whitespace from start and end of strings
+
+padStart(length, char) uses char to pad the start of the string
+
+split(char) to split on character and join to join an array of strings into one
+
+.repeat to repeat a string X times (stays in one string)
+
+* Rest parameters
+
+...before the last parameter in a function def to take any number of arguments.
+function max(...numbers) {
+    let result = -Infinity;
+    for (let number of numbers) {
+        if (number > result) result = number;
+    }
+    return result;
+}
+rest parameter bound to array of all further arguments. Same ... notation can call a function with array of arguments.
+
+let numbers = [5, 1, 7];
+console.log(max(...numbers));
+
+spreads out the array into individual number parameters
+
+let vals = [1, 2]
+console.log([0, ...vals, 3]); // 0, 1, 2, 3
+
+* Math object
+
+Grab bag of number related utility functions. Math as a namespace binding to not pollute global namespace.
+
+JS won't warn you if you overwrite a global for var or function, only for let or const.
+
+Math.random() between 0 and 1 (inclusive, exclusive)
+
+To get a whole number use Math.floor
+
+Math.floor(Math.random() * 10);
+
+* Destructuring
+
+function myFunc([val1, val2, val3, val4]) {
+    can use values here
+}
+
+Lets you 'look inside' the values of an array passed in. Can do the same thing with objects like so.
+
+let {name} = {name: 'Ian', age: 38};
+console.log(name); // Ian
+
+* JSON
+
+The values and object are all stored in memory. To serialize them, we use JSON. 
+
+All property names must have double quotes, only simple data expressions are allowed - no function calls, bindings, or anything with computation. No comments
+
+{
+    "squirrel": false,
+    "events": ["work", "eat"]
+}
+
+JSON.stringify and JSON.parse to convert data to and from this format.
+
+
