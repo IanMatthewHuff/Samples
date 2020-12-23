@@ -1,0 +1,148 @@
+* Encapsulation
+
+Each piece of programming is as small as it can be, and manages its own state.
+
+Javascript doesn't worry about public and private as a general language feature.
+
+* Methods
+
+Methods are just properties that hold function values.
+
+let rabbit = {};
+rabbit.speak = function(line) {
+    console.log(`The rabbit says: ${line}`);
+};
+rabbit.speak("I'm alive");
+
+When the function is called as a method 'this' binding automatically points at the object that it was called on.
+
+The function call method allows you to pass your own 'this' parameter as the first argument
+speak.call(hungryRabbit, "Burp!");
+
+Normally each function has it's own this binding, who's value depends on how it was called. So you cannot refer
+to the 'this' of the wrapping scope in a regular function defined with the 'function' keyword.
+
+Arrow functions are different, they don't bind their own this, and can see the 'this' binding of the scope
+around them. So something like this works:
+
+function normalize() {
+    console.log(this.coords.map(n => n / this.length));
+}
+normalize.call({coords: [0, 2, 3], length: 5});
+
+If the argument to map was written with the function keyword this would not work.
+
+* Prototypes
+
+let empty = {};
+console.log(empty.toString);
+// function toString() {...}
+console.log(empty.toString());
+// [object Object]
+
+How can this be an an empty object.
+
+In addition to their set of properties objects have a prototype. Prototype is another object that is
+used as a fallback source of properties. The chain of prototypes is searched for the property if the object
+doesn't have it.
+
+Object.prototype is the prototype of all objects. 
+
+console.log(Object.getPrototypeOf({}) == Object.prototype); // true
+
+Most objects have more in the prototype chain before the base, such as Function.prototype from functions.
+or arrays from Array.prototype.
+
+You can use Object.create to create an object with a specific prototype
+
+let protoRabbit = {
+    speak(line) {
+        console.log(`This ${this.type} rabbit says ${line}`);
+    }
+};
+let killerRabbit = Object.create(protoRabbit);
+killerRabbit.type = "killer";
+killerRabbit.speak("SKEEE!"); //The killer rabbit says SKEEE!
+
+speak(line) in object expression is a shorthand way to define a method. Proto rabbit is now a 
+container for properties shared by all rabbits. 
+
+* Classes
+
+To create a class you need to Object create and assign to the properties that it is supposed to have.
+
+JS makes this easier by using the keyword new in front of a function call to treat it as a constructor.
+
+Constructors automatically get a property called prototype which by default holds a plain empty object that
+derives from Object.prototype. You can overwrite or add to it if desired.
+
+function Rabbit(type) {
+    this.type = type;
+}
+Rabbit.prototype.speak = function(line) {
+    console.log(`This ${this.type} rabbit says ${line}`);
+};
+let weirdRabbit = new Rabbit("weird");
+
+* Class Notation
+
+Now in JS notation we have an easier way to do this.
+
+class Rabbit {
+    constructor(type) {
+        this.type = type;
+    }
+    speak(line) {
+        ...
+    }
+}
+let killerRabbit = new Rabbit("killer");
+
+class keyword starts a class declaration to define constructor and methods.
+
+* Overriding derived properties
+
+When you add a new property it will override existing ones to provide the implementation.
+
+* Maps
+
+A data structure. Something like this:
+
+let ages = {
+    Boris: 39,
+    Luisa: 22
+};
+
+Has a .toString on it from the base prototype which we don't want. So instead:
+
+let ages = new Map();
+ages.set("Boris", 39);
+
+Now there are no loose functions / properties on it.
+
+set, get, has part of interface on map
+
+Object.keys only returns the keys on that object, not those in the prototype. Or hasOwnProperty.
+
+console.log({x: 1}.hasOwnProperty("x")); // true
+console.log({x: 1}.hasOwnProperty("toString")); // false
+
+* Polymorphism
+
+Can override your own prototype function like toString with your own function.
+
+* Symbols
+
+Property names are symbols, not strings. Values created from Symbol function. Unique and cannot
+be created twice.
+let sym = Symbol("name");
+sym == Symbol("name"); // false
+Rabbit.prototype[sym] = 55;
+blackRabbit[sym]; // 55
+
+Multiple symbols can have the same name. You can use symbols as property names to keep them unique
+from any other existing propertys with the same string value.
+
+So Symbol("toString") can be added to not override toString method.
+
+
