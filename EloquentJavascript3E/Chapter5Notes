@@ -1,0 +1,61 @@
+* Abstractions
+
+Move to higher level abstractions to work with a more natural vocabulary
+
+Use abstractions to pull out repitition
+
+* Higher Order functions
+
+Functions that operate on other functions.
+
+Functions can also create or change other functions. Or new types of control flow.
+
+function unless(test, then) {
+    if (!test) then();
+}
+
+repeat(3, n => {
+    unless(n % 2 == 1, () = {
+        console.log(n, " is even");
+    });
+});
+
+* Script Data Set
+
+* Filtering Arrays
+
+.filter(testFunc) to filter an array based on truthy testFunc
+
+* Transform with Map
+
+.map(mapFunc) to apply mapFunc to each array element and return the new array
+
+* Summarize with Reduce
+
+Builds a value by repeatedly taking a single value from the array and combining with current value.
+Parameter is array, combining function, start value.
+
+function reduce(array, combine, start) {
+    let current = start;
+    for (let element of array) {
+        current = combine(current, element);
+    }
+    return current;
+}
+console.log(reduce([1, 2, 3, 4], (a, b) => a + b, 0));
+
+On array class this exists, can omit start to start with first element.
+
+* Composability
+
+Higher order functions shine when combining more than one of them together. 
+function average(array) {
+    return array.reduce((a, b) => a + b) / array.length;
+}
+
+Math.round(average([1, 2, 3]));
+
+Some = does anything match test in array
+indexOf = look for value
+findIndex = first index for which function tests true
+
