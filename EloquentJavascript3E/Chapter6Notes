@@ -145,4 +145,56 @@ from any other existing propertys with the same string value.
 
 So Symbol("toString") can be added to not override toString method.
 
+* The Iterator Interface
+
+Objects given to for / of loop must be iterable. Symbol.iterator property must be present.
+
+That method returns object with a second interface, iterator. Has a next method that provides the next one and a
+done property which is true when there are no more results.
+
+let okIter = "OK"[Symbol.iterator();
+okIterator.next(); // {value: "O", done: false }
+okIterator.next(); // {value: "K", done: false }
+okIterator.next(); // {value: undefined, done: true }
+
+* Getters, Setters, Statics
+
+Properties on an interface that hold non-function values.
+
+let varyingSize = {
+    get size() {
+        return Math.floor(Math.random() * 100);
+    }
+};
+
+get fahrenheit() {
+    return this.celsius * 1.8 + 32;
+}
+set fahrenheit(value) {
+    this.celsius = (value - 32) / 1.8;
+}
+static fromFahrenheit(value) {
+    return new Temperature((value - 32) / 1.8);
+}
+
+* Inheritance
+
+class SymmetricMatrix extends Matrix {
+    constructor(size) {
+        super(size);
+    }
+    set(x, y, value) {
+        super.set(x, y, value);
+    }
+}
+
+extends indicated that it's based on another class, not the default object prototype.
+
+super is a keyword to call properties on the base class even if in the override.
+
+* Instanceof operator
+
+Can be used to see of X is in the prototype chain. So something like:
+SymmetricMatrix instanceof object // true
+
 
