@@ -1,0 +1,48 @@
+Javascript is inherently very loose. true * "monkey" will be run without complaint.
+
+"use strict" at top of files for some basic checking. 
+For example, won't create a global binding for an undefined variable.
+
+Also the this binding holds undefined in functions not called as methods. 
+
+Like so:
+function Person(name) { this.name = name; }
+let fred = Person("Fred");
+console.log(name); // Fred
+
+"use strict";
+function Person(name) { this.name = name; }
+let fred = Person("Fred"); // Forgot new
+// TypeError: Cannot set property 'name' of undefined
+
+Exeception fully unwinds the stack up to where it is handled.
+
+throw new Error("Invalid Input");
+
+try {
+    ...
+} catch (error) {
+    console.log(error);
+}
+
+Javascript errors put the current callstack on the .stack property of the error
+
+finally block used to run no matter what happens in a try block. Does not interfer with the error
+finally block will run then the stack will continue to unwind
+
+Create specific errors for specific catches
+
+class InputError extends Error {}
+
+function prompt() {
+    throw new InputError("Invalid direction");
+}
+
+try {
+} catch (e) {
+    if (e instanceof InputError) {
+        ...
+    } else {
+        throw e;
+    }
+}

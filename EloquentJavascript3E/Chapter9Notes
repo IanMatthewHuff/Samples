@@ -1,0 +1,126 @@
+* Regular Expressions *
+
+created either with RegExp or forward slash
+let re1 = new RegExp("abc");
+let re2 = /abc/;
+
+When using RegExp normal string rules for backslashes
+
+Second notation backslash is needed before any forward slash that is part of the pattern.
+Backslash to escape some other special characters.
+
+let eighteenPlus = /eighteen\+/;
+
+* Testing for matches *
+test method passed a string returns a boolean for a match of the pattern
+/abc/.test("abcde")); // true
+/abc/.test("abxde")); // false
+
+* Set of characters *
+match all strings that contain a digit
+/[0123456789]/.test("in 1992"));
+/[0-9]/.test("in 1992"));
+
+- in square brackets indicates a range determined by unicode number
+
+\d = digit \w alphanumeric \s whitespace \D not digit \W non alpha \S non whitespace . any except newline
+
+Special characters inside brackets lose meaning so [\d.] means any digit or a '.' character
+
+use a ^ as first character in square bracket to invert the selection
+/[^01]/ = Non binary
+
+* Repeating *
++ may be repeated more than once
+* same as + but will also match on 0 times
+? is zero or one times
+/neighbou?r/ matches neighbour and neightbor
+braces can match an exact number of times {4] = four times {2,4} at least twice and at most four times
+
+* Grouping subexpressions *
+use () when using * or + on more than one element to group elements () counts as a single element
+let cartoonCrying = /boo+(hoo+)+/i;
+/i marks as case insensitive
+matches stuff like "Boohoooohoooohooo"
+
+* Matches and groups
+.exec method returns null if no match or info on the match otherwise.
+
+Object from exec can index for where in the string the match was found. String values have .match the works the same
+
+If regex has groups with () then exec returns them in the array of results. Full match is always first result
+/bad(ly)?/.exe("bad")); // ["bad", undefined] undefined if no match for part of the group
+
+* The Date class
+Javascript starts months at 0 but days at 1?
+
+Date with a single argument = millisecond count from the start of 1970
+
+// Way to create a date from 1-30-2020 format
+let [_, month, day, year] =
+    /(\d{1,2})-(\d{1,2})-(\d{4})/.exec(string);
+    return new Date(year, month-1, day);
+
+* Word and string boundaries
+^ matches start of input string and $ matches end, so we can restrict positioning inside the search text
+
+/^!/ = any string starting with !
+\b is the marker for a word boundary between \w on one side and non \w on the other
+
+* Choice patterns
+| is a choice between pattern to left and pattern to right
+let animalCount = /\b\d+ (pig|cow|chicken)s?\b/;
+.test("15 pigs") // true
+.test("15 pigchickens"); // false
+
+* Mechanics of matching
+Start from first character and walk right, checking at each character for an expression match
+
+* Replace method
+"papa".replace("p", "m");
+
+First arg can be regex // /g is global to work for all matches
+"Brobudur".replace(/[ou]/, "a"));
+
+$1, $2 in replacement strings can refer to groups in the match
+"Huff, Ian\bHuff, Elizabeth".replace(/(\w+), (\w+)/g, "$2 $1"); //Ian Huff\nElizabeth Huff
+
+Can also pass the match to a function
+"the cia and fbi".replace(/\b(fbi|cia)\b/g, str => str.toUpperCase())); // the CIA and FBI
+
+* Greed
++ * ? {} are greedy, they match as much as they can, and backtrack from there. Adding ? makes them non-greedy
+matches as little as possible first, then only match more if the remaining pattern does not fit
+
+* Dynamic
+
+Can dynamically work with a RegExp to substitute values for a custom regex
+
+* The Search method
+
+indexOf can't work with a regex, but the serach method on a string does. Returns first index where found or -1 if not matched
+
+* lastIndex
+
+On a match the lastIndex property on the match keeps track of the next location to search if you exec again.
+you can use /g to check global or /y to be sticky and check from last location
+
+Can get errors from this, like so
+
+let digit = /\d/g;
+digit.exec("here is 1"); // ["1"]
+digit.exec("and now 1"); // null
+
+.match on a string with /g now returns all matches in the array, not just the first.
+
+* Loop over matches
+let input = "A string with 3 numbers in it... 42 and 88.";
+let number = /\b\d+\b/g;
+let match;
+while (match = number.exec(input)) {
+  console.log("Found", match[0], "at", match.index);
+}
+// → Found 3 at 14
+// Found 42 at 33
+// Found 88 at 40
+

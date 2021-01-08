@@ -196,5 +196,3 @@ super is a keyword to call properties on the base class even if in the override.
 
 Can be used to see of X is in the prototype chain. So something like:
 SymmetricMatrix instanceof object // true
-
-
