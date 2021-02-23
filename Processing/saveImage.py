@@ -1,4 +1,4 @@
-# Test here to generate 10 unique images in a directory
+# save a single generated image into disk
 
 # noLoop to prevent auto drawing, and redraw to run code in draw a single time
 def setup():
@@ -7,5 +7,6 @@ def setup():
 
 
 def draw():
-    background(255)
+    background(255, 204, 0)
     fill(0)
+    save("testImage.png")
